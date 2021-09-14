@@ -1,2 +1,2 @@
-# phishing-domain-detection
+# Phishing Domain Detection
 Project to detect phishing domains.
