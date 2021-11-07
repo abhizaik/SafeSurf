@@ -1,5 +1,7 @@
 # Phishing Domain Detection
 
+![cover_image](https://github.com/akpmpr/phishing-domain-detection/blob/main/misc/phishing-image.jpg?raw=true)
+
 ## Objective
 Phishing is a type of social engineering attack often used to steal user data, including login credentials and credit card numbers. It occurs when an attacker, masquerading as a trusted entity, dupes a victim into opening a URL send via an email, instant message, or text message. The objective of this project is to train machine learning models on the dataset created to predict phishing websites. Both phishing and legit URLs of websites are gathered to form a dataset and from them required URL features are extracted. The performance level of each model is measures and compared.
 
@@ -29,5 +31,5 @@ All these models are trained on the train dataset and evaluation of the model is
 ## Result
 From the obtained results of the above models, XGBoost Classifier has highest model performance of 95.6%. So the model is saved to the file [XGBClassifier.pickle.dat](https://github.com/akpmpr/phishing-domain-detection/blob/main/XGBClassifier.pickle.dat).
 
-## Next Step
+## Next Steps
 This project can be further extended by creating an application on Flask and hosting it in a cloud platform like AWS, Azure or GCP, which will take the URL and predict it's nature i.e. legitimate or phishing. As of now, I am working towards the creation of the Flask application for this project. The further developments will be updated at the earliest.
