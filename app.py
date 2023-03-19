@@ -12,9 +12,6 @@ def result():
     print(url)
     result = controller.main(url)
     output = result
-    # output['status'] = 'Your input was ' + result['url']
-    # output['input'] = 'Your input was ' + result['url']
-    # output['msg'] = 'Your input was ' + result['url']
 
     return render_template('index.html', output=output)
 
