@@ -10,9 +10,6 @@ import requests
 import json
 import csv
 import time
-import numpy
-import ssl
-import socket
 
 
 global BASE_SCORE
