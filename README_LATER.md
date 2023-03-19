@@ -44,4 +44,6 @@ ssl certificate validity (self signed / invalid check)
 unusual extension (.tk,pw) TLD
 non standard url
 pop ups
-presence of email address in url -->
+presence of email address in url 
+env : phishing-env
+-->
