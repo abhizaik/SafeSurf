@@ -1,0 +1,3 @@
+[console_scripts]
+urlparser = urlparser.urlparser:cli
+
