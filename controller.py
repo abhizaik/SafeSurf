@@ -9,15 +9,10 @@ BASE_SCORE = 50  # default trust_ score of url out of 100
 def main(url):
 
     # input validattion
-    url = url.lower()
-    url_validation = model.validate_link(url)
-
-    if (not url_validation):
-        response = {'status': 'ERROR', 'url': url, 'msg': "Link is not valid."}
-        return response
+    url = model.include_protocol(url.lower())
+    url_validation = model.validate_url(url)
 
     # default data
-    url = url_validation['url']
     response = {'status': 'SUCCESS', 'url': url, 'msg': "URL is valid."}
     domain = tldextract.extract(url).domain + '.' + tldextract.extract(url).suffix
     parsed_url = urlparse(url)
@@ -32,6 +27,11 @@ def main(url):
         response = {'status': 'SUCCESS', 'url': url,
                     'msg': "This is a verified phishing link."}
         return response
+
+    if (not url_validation):
+        response = {'status': 'ERROR', 'url': url, 'msg': "Link is not valid."}
+        return response
+
 
     # domain_rank
     domain_rank = model.get_domain_rank(domain)

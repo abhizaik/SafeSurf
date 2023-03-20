@@ -30,21 +30,25 @@ PROPERTY_SCORE_WEIGHTAGE = {
 
 
 # check whether the link is active or not
-def validate_link(link):
+def validate_url(url):
     try:
-        if not link.startswith('http://') and not link.startswith('https://'):
-            link = 'http://' + link
-
-        response = requests.get(link)
+        response = requests.get(url)
         if(response.status_code == 200):
-            return {'url': link}
+            return True
         else:
             return False
 
     except requests.exceptions.RequestException:
         return False
 
+def include_protocol(url):
+    try:
+        if not url.startswith('http://') and not url.startswith('https://'):
+            url = 'https://' + url
+        return url
 
+    except:
+        return url
 
 # get domain rank if it exists in top 1M list
 def get_domain_rank(domain):
