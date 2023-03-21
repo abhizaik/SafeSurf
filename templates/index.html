@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
 
@@ -5,30 +6,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <title>Phishing Domain Detection</title>
+    <title>SurfSafe</title>
 </head>
 
 <body>
+    {% block content %}
 
     <div class="container">
 
         <a href="/" class="logo">
-            <h1>Phishing Domain Detection</h1>
+            <h1>SurfSafe</h1>
         </a>
+
+        <div class="short-note">
+            <p>Protect yourself from <strong>phishing attacks</strong> with our <strong>FOSS</strong> tool. Surf safe with <strong>SurfSafe</strong>!</p>
+        </div>
 
         <form action="/result" method="post">
             <input type="text" name="url" placeholder="URL" required="required" />
             <button type="submit" class="btn">CHECK URL</button>
         </form>
 
+        {% endblock %}
+
         <div class="output">
             {{output}}
         </div>
 
         <div class="footer">
-            <a href="https://github.com/incogGod/phishing-domain-detection">GitHub</a>
-            <span> &nbsp;|&nbsp; </span>
-            <a href="https://incoggod.com/">Author</a>
+            <a href="https://github.com/incogGod/phishing-domain-detection"><strong>GitHub</strong></a>
+            <span> &nbsp;|&nbsp; </span> Brought to you by&nbsp;
+            <a href="https://incoggod.com/"> <strong>incogGod</strong></a>
         </div>
 
     </div>

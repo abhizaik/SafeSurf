@@ -11,12 +11,29 @@ h1 {
     font-size: 3rem;
     margin-bottom: 2rem;
     text-align: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .logo {
     text-decoration: none;
     color: inherit;
+}
+
+.short-note {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    padding: 0 15px 0;
+}
+
+.result {
+    text-decoration: none;
+    color: inherit;
+    text-align: left;
+    margin: 0 auto;
+    padding: 20px;
+    padding-left: 80px;
+    width: 70%;
 }
 
 form {
@@ -76,6 +93,7 @@ output {
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 9999;
     width: 100%;
     height: 4rem;
 }
@@ -98,8 +116,35 @@ main {
     align-items: center;
 }
 
+#preview-container {
+    border: 10px solid red;
+    margin: 30px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    padding: 30px;
+}
+
+#warning-message {
+    font-size: 24px;
+    font-weight: bold;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 100%; */
+    color: #fff;
+    padding: 20px;
+    background-color: #1D1D1D;
+}
+
 @media only screen and (min-width: 768px) {
     input[type="text"] {
         width: 60%;
+    }
+    .result {
+        max-width: 100%;
+        padding: 10px;
+        padding-left: 10px;
     }
 }

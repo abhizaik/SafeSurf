@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <title>SurfSafe</title>
+</head>
+
+<body>
+
+    {% block content %}{% endblock %}
+
+    <div class="footer">
+        <a href="https://github.com/incogGod/phishing-domain-detection" target="_blank" rel="noopener noreferrer"><strong>GitHub</strong></a>
+        <span> &nbsp;|&nbsp; </span> Brought to you by&nbsp;
+        <a href="https://incoggod.com/" target="_blank" rel="noopener noreferrer"> <strong>incogGod</strong></a>
+    </div>
+
+
+</body>
+
+</html>

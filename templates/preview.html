@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Website Preview</title>
+
+</head>
+
+<body>
+    {% block content %}
+    <div id="warning-message">You're on SurfSafe, so you're good to go. But stay vigilant. No clicks, no downloads.</div>
+    <div id="preview-container">
+        {{ content | safe }}
+    </div>
+    {% endblock %}
+</body>
+
+</html>
