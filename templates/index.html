@@ -3,27 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <title>Phishing Domain Detection</title>
 </head>
 
 <body>
 
-    <br><br><br><br><br><br><br><br>
-    <center>
+    <div class="container">
 
-        <h1>Phishing Domain Detection</h1>
+        <a href="/" class="logo">
+            <h1>Phishing Domain Detection</h1>
+        </a>
 
         <form action="/result" method="post">
             <input type="text" name="url" placeholder="URL" required="required" />
-            <br><br>
             <button type="submit" class="btn">CHECK URL</button>
         </form>
 
-        <br> {{ output }}
+        <div class="output">
+            {{output}}
+        </div>
 
-    </center>
+        <div class="footer">
+            <a href="https://github.com/incogGod/phishing-domain-detection">GitHub</a>
+            <span> &nbsp;|&nbsp; </span>
+            <a href="https://incoggod.com/">Author</a>
+        </div>
 
+    </div>
 
 </body>
 
