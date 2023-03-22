@@ -10,14 +10,13 @@
 
 <body>
 
-    {% block content %}{% endblock %}
-
+    {% block content %}{% endblock %} {% if '/preview/' not in request.path %}
     <div class="footer">
         <a href="https://github.com/incogGod/phishing-domain-detection" target="_blank" rel="noopener noreferrer"><strong>GitHub</strong></a>
         <span> &nbsp;|&nbsp; </span> Brought to you by&nbsp;
         <a href="https://incoggod.com/" target="_blank" rel="noopener noreferrer"> <strong>incogGod</strong></a>
     </div>
-
+    {% endif %}
 
 </body>
 

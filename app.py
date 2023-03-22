@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
 import requests
 from urllib.parse import urljoin
+from urllib.parse import unquote
 import controller
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ def result():
 @app.route('/preview/<path:url>')
 def preview(url):
     try:
+        url = unquote(url)
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
 

@@ -1,4 +1,4 @@
-from urllib.parse import urlparse, urlencode
+from urllib.parse import urlparse, urlencode, quote, unquote
 import tldextract
 import model
 
@@ -13,9 +13,10 @@ def main(url):
     url_validation = model.validate_url(url)
 
     # default data
-    response = {'status': 'SUCCESS', 'url': url, 'msg': "URL is valid."}
     domain = tldextract.extract(url).domain + '.' + tldextract.extract(url).suffix
     parsed_url = urlparse(url)
+    encoded_url = quote(url, safe='')
+    response = {'status': 'SUCCESS', 'url': url, 'encoded_url' : encoded_url, 'msg': "URL is valid."}
     trust_score = BASE_SCORE
 
 
