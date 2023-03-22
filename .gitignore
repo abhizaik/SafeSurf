@@ -1,3 +1,4 @@
 .vercel
 __pycache__/
 phishing-env/
+safesurf-env/
