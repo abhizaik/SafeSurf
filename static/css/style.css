@@ -4,7 +4,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 h1 {
@@ -81,7 +81,7 @@ output {
     flex-direction: column;
     /* justify-content: center;
     align-items: center; */
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding-top: 10%;
 }
 
