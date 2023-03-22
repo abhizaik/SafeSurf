@@ -5,15 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <title>SurfSafe</title>
+
+    <title>SafeSurf</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
 </head>
 
 <body>
 
     {% block content %}{% endblock %} {% if '/preview/' not in request.path %}
-    <div class="footer">
+    <div class="app-footer">
         <a href="https://github.com/incogGod/phishing-domain-detection" target="_blank" rel="noopener noreferrer"><strong>GitHub</strong></a>
-        <span> &nbsp;|&nbsp; </span> Brought to you by&nbsp;
+        <span> &nbsp;|&nbsp; </span> Created by&nbsp;
         <a href="https://incoggod.com/" target="_blank" rel="noopener noreferrer"> <strong>incogGod</strong></a>
     </div>
     {% endif %}

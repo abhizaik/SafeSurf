@@ -8,9 +8,10 @@ body {
 }
 
 h1 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
+    font-size: 4rem;
+    margin-bottom: 1rem;
     text-align: center;
+    color: #7653ff;
     /* text-transform: uppercase; */
 }
 
@@ -59,14 +60,14 @@ button[type="submit"] {
     border-radius: 0.5rem;
     padding: 0.8rem 2rem;
     font-size: 1.2rem;
-    background-color: #7c5dfa;
+    background-color: #6e49ff;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #9279FF;
+    background-color: #623df9;
 }
 
 output {
@@ -84,7 +85,7 @@ output {
     padding-top: 10%;
 }
 
-.footer {
+.app-footer {
     background-color: #1D1D1D;
     color: #fff;
     display: flex;
@@ -98,14 +99,14 @@ output {
     height: 4rem;
 }
 
-.footer a {
-    color: #fff;
+.app-footer a {
+    color: #7653ff;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.footer a:hover {
-    color: #7c5dfa;
+.app-footer a:hover {
+    color: #6e49ff;
 }
 
 main {
