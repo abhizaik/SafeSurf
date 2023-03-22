@@ -1,8 +1,7 @@
 from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
 import requests
-from urllib.parse import urljoin
-from urllib.parse import unquote
+from urllib.parse import urljoin, quote, unquote
 import controller
 
 app = Flask(__name__)
