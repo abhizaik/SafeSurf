@@ -24,7 +24,7 @@ def result():
 @app.route('/preview/<path:url>')
 def preview(url):
     try:
-        url = urllib.parse.unquote(url)
+        url = urllib.parse.unquote(url, encoding='ISO-8859-1')
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
 
