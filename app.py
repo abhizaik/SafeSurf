@@ -41,8 +41,7 @@ def preview(url):
 
         return render_template('preview.html', content=soup.prettify())
     except Exception as e:
-        print(e)
-        return 'Failed to preview URL.'
+        return  f"Error: {e}"
 
 
 if __name__ == '__main__':
