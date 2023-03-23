@@ -6,19 +6,27 @@ from urllib.parse import urljoin
 import controller
 
 app = Flask(__name__)
-@app.route('/')
+@app.route('/',  methods=['GET','POST'])
 def home():
-    return render_template('index.html')
+    
+    try:
+        url = request.form['url']
+        result = controller.main(url)
+        output = result
+    except:
+        output = 'NA'
+
+    return render_template('index.html', output=output)
 
 
-@app.route('/result', methods=['POST'])
-def result():
-    url = request.form['url']
-    print(url)
-    result = controller.main(url)
-    output = result
+# @app.route('/result', methods=['POST'])
+# def result():
+#     url = request.form['url']
+#     print(url)
+#     result = controller.main(url)
+#     output = result
 
-    return render_template('result.html', output=output)
+#     return render_template('result.html', output=output)
 
 
 @app.route('/preview/<path:url>')
