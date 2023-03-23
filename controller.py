@@ -47,7 +47,7 @@ def main(url):
     # domain_age
     domain_age = model.domain_age(domain)
     trust_score = model.calculate_trust_score(trust_score, 'domain_age', domain_age)
-    response['age'] = str(round(domain_age,1)) + ' years old.'
+    response['age'] = str(round(domain_age,1)) + ' year(s)'
 
 
     # is_url_shortened

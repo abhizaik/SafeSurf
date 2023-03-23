@@ -30,10 +30,70 @@
         {% if output != "NA" %}
         <div class="result">
 
-            {% if output.status == "SUCCESS" %} Safely view this website within SafeSurf : <a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button>Preview</button></a> <br> URL : {{output.url}} <br>            Trust Score : {{output.trust_score}} / 100 <br> Global Rank (Denotes Reputaion) : {{output.rank}} <br> Domain Age : {{output.age}} <br> Is URL hidden using any URL shorteners : {% if output.is_url_shortened == 1%} YES {% else %} NO {% endif
-            %} <br> HSTS Support : {% if output.hsts_support == 1%} YES {% else %} NO {% endif %} <br> IP instead of Domain : {% if output.ip_present == 1%} YES {% else %} NO {% endif %} <br> URL Redirects to Other Pages : {% if output.url_redirects ==
-            0%} NO {% else %} URL redirects to {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %} <br> Too Long URL : {% if output.too_long_url == 1%} YES {% else %} NO {% endif %} <br> Too Deep URL : {% if output.too_deep_url
-            == 1%} YES {% else %} NO {% endif %} <br> {% else %} URL : {{output.url}} <br> Message : {{output.msg}} <br> {% endif %}
+            {% if output.status == "SUCCESS" %} 
+
+<a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">Safely view this URL within SafeSurf</button></a> <br> <br> 
+URL : {{output.url}} <br> 
+Trust Score : {{output.trust_score}} / 100 <br><br>
+
+Info for Nerds <br><br>
+<table>
+    <thead>
+        <tr>
+            <th>Propery</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>Global Rank</td>
+            <td>{{output.rank}}</td>
+        </tr>
+
+        <tr>
+            <td>Domain Age</td>
+            <td>{{output.age}}</td>
+        </tr>
+
+        <tr>
+            <td>Use of URL Shortener</td>
+            <td>{% if output.is_url_shortened == 1%} YES {% else %} NO {% endif %}</td>
+        </tr>
+
+        <tr>
+            <td>HSTS Support</td>
+            <td>{% if output.hsts_support == 1%} YES {% else %} NO {% endif %}</td>
+        </tr>
+
+        <tr>
+            <td>IP instead of Domain</td>
+            <td>{% if output.ip_present == 1%} YES {% else %} NO {% endif %}</td>
+        </tr>
+
+        <tr>
+            <td>URL Redirects</td>
+            <td>{% if output.url_redirects == 0%} NO {% else %} URL redirects to
+                {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</td>
+        </tr>
+
+        <tr>
+            <td>Too Long URL</td>
+            <td>{% if output.too_long_url == 1%} YES {% else %} NO {% endif %}</td>
+        </tr>
+
+        <tr>
+            <td>Too Deep URL</td>
+            <td>{% if output.too_deep_url == 1%} YES {% else %} NO {% endif %}</td>
+        </tr>
+ 
+</tbody>
+</table>
+ 
+ {% else %} 
+ URL : {{output.url}} <br> 
+ Message : {{output.msg}} <br> 
+ {% endif %}
 
         </div>
         {% endif %} {% endblock %}
