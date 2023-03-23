@@ -1,8 +1,11 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file
+from io import BytesIO
 from bs4 import BeautifulSoup
 import requests
 import urllib.parse
 from urllib.parse import urljoin
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import controller
 
 app = Flask(__name__)
@@ -18,6 +21,32 @@ def home():
 
     return render_template('index.html', output=output)
 
+
+@app.route('/screenshot')
+def screenshot():
+    try:
+
+        # set up the headless browser
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')
+        driver = webdriver.Chrome(options=options)
+
+        # navigate to the website
+        driver.get('https://www.google.com')
+
+        # take a screenshot
+        screenshot = driver.get_screenshot_as_png()
+
+        # close the browser
+        driver.quit()
+
+        # convert the screenshot to a bytes object
+        screenshot_bytes = BytesIO(screenshot)
+
+        # return the screenshot as an image
+        return send_file(screenshot_bytes, mimetype='image/png')
+    except Exception as e:
+        return  f"Error: {e}"
 
 # @app.route('/result', methods=['POST'])
 # def result():
