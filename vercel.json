@@ -7,5 +7,8 @@
     "routes": [{
         "src": "/(.*)",
         "dest": "app.py"
-    }]
+    }],
+    "scripts": {
+        "prestart": "export PATH=$PWD/bin:$PATH"
+    }
 }
