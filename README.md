@@ -1,31 +1,31 @@
 
-<img src="static/safesurf-normal.png"  width="400" height="100">
+<img src="static/safesurf.png"  width="400" height="100">
 
 
 # SafeSurf
 
-SafeSurf is a website that helps us in detecting phishing domains, built using Python. With SafeSurf, you can quickly identify suspicious websites and protect yourself from phishing attacks.
+SafeSurf is a tool that helps us to identify phishing URLs, built using Python. With SafeSurf, you can quickly identify suspicious websites and protect yourself from phishing attacks.
 
 
 ## Features
 
-These are the fetures provided by SafeSurf to it's users.
+These are the features provided by SafeSurf to its users.
 - The website is easy to use, with a simple interface that anyone can navigate.
-- Users can see a perview of the website without actually visiting it.
-- SafeSurf gives a trust score to the URL which will give the user an understanding about the trustability and authenticity of the domain.
-- The URL is checked with famous phish database like PhishTank to see if it's already reported.
-- SafeSurf provides important details regarding the domain of which will help the user to get a basic understanding about the URL.
+- Users can see the preview of the website without actually visiting it.
+- SafeSurf gives a trust score to the URL, which will provide the user an understanding of the trustability and authenticity of the domain.
+- The URL is checked with a phish database (PhishTank) to see whether it is a reported phishing link.
+- SafeSurf provides crucial details regarding the domain, which will help the user to get a basic understanding of the URL.
 
 ## Demo
 
 https://safesurf.vercel.app
 
-<img src="static/safesurf-screenshot.png"  width="640" height="320">
+<img src="static/safesurf-screenshot.png"  width="400" height="200">
 
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://en.wikipedia.org/wiki/MIT_License)
 
 
 <!-- ## Contributing
@@ -38,7 +38,7 @@ See `contributing.md` for ways to get started. -->
 
 ## Feedback
 
-If you have any feedback, please reach out to me at https://incoggod.com/contact/
+If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/. Any input is highly appreciated.
 
 
 <!-- ## Authors

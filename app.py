@@ -19,15 +19,6 @@ def home():
     return render_template('index.html', output=output)
 
 
-# @app.route('/result', methods=['POST'])
-# def result():
-#     url = request.form['url']
-#     print(url)
-#     result = controller.main(url)
-#     output = result
-
-#     return render_template('result.html', output=output)
-
 
 @app.route('/preview/<path:url>')
 def preview(url):
@@ -41,9 +32,9 @@ def preview(url):
         for link in soup.find_all('link'):
             if link.get('href'):
                 link['href'] = urljoin(url, link['href'])
-        for script in soup.find_all('script'):
-            if script.get('src'):
-                script['src'] = urljoin(url, script['src'])
+        # for script in soup.find_all('script'):
+        #     if script.get('src'):
+        #         script['src'] = urljoin(url, script['src'])
         for img in soup.find_all('img'):
             if img.get('src'):
                 img['src'] = urljoin(url, img['src'])

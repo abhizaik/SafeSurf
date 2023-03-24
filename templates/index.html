@@ -2,14 +2,8 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
-    <title>SafeSurf</title>
-</head>
-
 <body>
+
     {% block content %}
 
     <div class="container">
@@ -24,91 +18,110 @@
 
         <form action="/" method="post">
             <input type="text" name="url" placeholder="URL" required="required" />
-            <button type="submit" class="btn">CHECK URL</button>
+            <button type="submit" class="btn" onclick="showLoadingSpinner()">CHECK URL</button>
         </form>
 
         {% if output != "NA" %}
         <div class="result">
 
-            {% if output.status == "SUCCESS" %} 
+            {% if output.status == "SUCCESS" %}
 
-<a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">Safely view this URL within SafeSurf</button></a> <br> <br> 
-URL : {{output.url}} <br> 
-Trust Score : {{output.trust_score}} / 100 <br><br>
+            <a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">View URL safely with SafeSurf</button></a>
+            <br><br> URL : {{output.url}} <br>
+            <strong>Trust Score : {{output.trust_score}} / 100 </strong>
 
-Info for Nerds <br><br>
-<table>
-    <thead>
-        <tr>
-            <th>Propery</th>
-            <th>Value</th>
-        </tr>
-    </thead>
-    <tbody>
+            <br><br>
 
-        <tr>
-            <td>Global Rank</td>
-            <td>{{output.rank}}</td>
-        </tr>
+            <strong>Info for Nerds</strong>
 
-        <tr>
-            <td>Domain Age</td>
-            <td>{{output.age}}</td>
-        </tr>
+            <br><br>
+            <table class="table-view">
+                <thead>
+                    <tr>
+                        <th>Propery</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        <tr>
-            <td>Use of URL Shortener</td>
-            <td>{% if output.is_url_shortened == 1%} YES {% else %} NO {% endif %}</td>
-        </tr>
+                    <tr>
+                        <td>Global Rank</td>
+                        <td>{{output.rank}}</td>
+                    </tr>
 
-        <tr>
-            <td>HSTS Support</td>
-            <td>{% if output.hsts_support == 1%} YES {% else %} NO {% endif %}</td>
-        </tr>
+                    <tr>
+                        <td>Domain Age</td>
+                        <td>{{output.age}}</td>
+                    </tr>
 
-        <tr>
-            <td>IP instead of Domain</td>
-            <td>{% if output.ip_present == 1%} YES {% else %} NO {% endif %}</td>
-        </tr>
+                    <tr>
+                        <td>Use of URL Shortener</td>
+                        <td>{% if output.is_url_shortened == 1%} YES {% else %} NO {% endif %}</td>
+                    </tr>
 
-        <tr>
-            <td>URL Redirects</td>
-            <td>{% if output.url_redirects == 0%} NO {% else %} URL redirects to
-                {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</td>
-        </tr>
+                    <tr>
+                        <td>HSTS Support</td>
+                        <td>{% if output.hsts_support == 1%} YES {% else %} NO {% endif %}</td>
+                    </tr>
 
-        <tr>
-            <td>Too Long URL</td>
-            <td>{% if output.too_long_url == 1%} YES {% else %} NO {% endif %}</td>
-        </tr>
+                    <tr>
+                        <td>IP instead of Domain</td>
+                        <td>{% if output.ip_present == 1%} YES {% else %} NO {% endif %}</td>
+                    </tr>
 
-        <tr>
-            <td>Too Deep URL</td>
-            <td>{% if output.too_deep_url == 1%} YES {% else %} NO {% endif %}</td>
-        </tr>
- 
-</tbody>
-</table>
- 
- {% else %} 
- URL : {{output.url}} <br> 
- Message : {{output.msg}} <br> 
- {% endif %}
+                    <tr>
+                        <td>URL Redirects</td>
+                        <td>{% if output.url_redirects == 0%} NO {% else %} URL redirects to {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</td>
+                    </tr>
+
+                    <tr>
+                        <td>IP Address of Domain</td>
+                        <td>{{output.ip}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Too Long URL</td>
+                        <td>{% if output.too_long_url == 1%} YES {% else %} NO {% endif %}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Too Deep URL</td>
+                        <td>{% if output.too_deep_url == 1%} YES {% else %} NO {% endif %}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <br><br>
+
+            <strong> WHOIS Data </strong>
+            <br><br>
+
+            <table class="table-view">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in output.whois.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            {% else %} URL : {{output.url}} <br> Message : {{output.msg}} <br> {% endif %}
+            <br><br>
 
         </div>
         {% endif %} {% endblock %}
 
-        <div class="output">
-            {{output}}
-        </div>
 
-        <div class="footer">
-            <a href="https://github.com/incogGod/phishing-domain-detection"><strong>GitHub</strong></a>
-            <span> &nbsp;|&nbsp; </span> Brought to you by&nbsp;
-            <a href="https://incoggod.com/"> <strong>incogGod</strong></a>
-        </div>
-
-    </div>
 
 </body>
 

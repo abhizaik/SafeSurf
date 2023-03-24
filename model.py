@@ -10,6 +10,7 @@ import requests
 import json
 import csv
 import time
+import socket
 
 
 global BASE_SCORE
@@ -81,15 +82,16 @@ def binary_search(arr, x):
             high = mid - 1
     return 0
 
-# get age of domain in years
-def domain_age(domain):
+# get whois data of domain
+def whois_data(domain):
     try:
-        domain = whois.whois(domain)
-        creation_date = domain.creation_date
+        whois_data = whois.whois(domain)
+        creation_date = whois_data.creation_date
         if type(creation_date) is list:
             creation_date = creation_date[0]
         age = (datetime.now() - creation_date).days / 365
-        return age
+        return {'age':age, 'data':whois_data}
+
     except Exception as e:
         print(f"Error: {e}")
         return False
@@ -229,6 +231,18 @@ def phishtank_search(url):
         return 0
 
 
+def get_ip(domain):
+
+    try:
+        print(domain)
+        ip = socket.gethostbyname(domain)
+        return ip
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return 0
+
+
 # TEST FUNCTION TO ADD NEW URL CHECKS
 def test(domain):
     
@@ -246,7 +260,7 @@ def calculate_trust_score(current_score, case, value):
 
     if case == 'domain_rank':
         if value == 0:  # not in top 10L rank
-            score = current_score - (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE * 0.5)
+            score = current_score #- (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE * 0.5)
         elif value < 100000:  # in top 1L rank
             score = current_score + (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE)
         elif value < 500000:  # in 1L - 5L rank

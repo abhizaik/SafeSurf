@@ -85,6 +85,15 @@ button[type="submit"]:hover {
     background-color: #623df9;
 }
 
+table {
+    /* width: 50% !important; */
+    table-layout: fixed;
+}
+
+td {
+    max-width: 50vw;
+}
+
 output {
     display: block;
     margin-top: 2rem;
@@ -166,5 +175,24 @@ main {
         max-width: 100%;
         padding: 10px;
         margin-left: 500px;
+    }
+}
+
+
+/* Loading Spinner */
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }
