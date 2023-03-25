@@ -26,7 +26,8 @@
 
             {% if output.status == "SUCCESS" %}
 
-            <a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">View URL safely with SafeSurf</button></a>
+            <a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">View URL safely within SafeSurf</button></a>
+            <br><br>(External scripts are disabled for your safety.)
             <br><br> URL : {{output.url}} <br>
             <strong>Trust Score : {{output.trust_score}} / 100 </strong>
 
@@ -113,6 +114,30 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+
+            {% if output.ssl != 0 %}
+            <br><br>
+            <strong> SSL Certificate Details </strong>
+            <br><br>
+
+            <table class="table-view">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in output.ssl.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
 
 
             {% else %} URL : {{output.url}} <br> Message : {{output.msg}} <br> {% endif %}

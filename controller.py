@@ -96,6 +96,11 @@ def main(url):
         else:
             response['ip'] = ip
 
+        
+        # get_certificate_details
+        ssl = model.get_certificate_details(domain)
+        response['ssl'] = ssl
+
 
         trust_score = int(max(min(trust_score, 100), 0))
         response['trust_score']= trust_score

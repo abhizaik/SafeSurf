@@ -1,10 +1,10 @@
 
-<img src="static/safesurf.png"  width="400" height="100">
+<img src="static/safesurf-normal.png"  width="400" height="100">
 
 
 # SafeSurf
 
-SafeSurf is a tool that helps us to identify phishing URLs, built using Python. With SafeSurf, you can quickly identify suspicious websites and protect yourself from phishing attacks.
+A phishing domain detection tool that also allows you to safely view the website without actually visiting it. Built using Python. With SafeSurf, you can quickly identify suspicious websites and protect yourself from phishing attacks.
 
 
 ## Features

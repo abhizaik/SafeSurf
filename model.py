@@ -11,6 +11,7 @@ import json
 import csv
 import time
 import socket
+import ssl
 
 
 global BASE_SCORE
@@ -238,6 +239,69 @@ def get_ip(domain):
         ip = socket.gethostbyname(domain)
         return ip
 
+    except Exception as e:
+        print(f"Error: {e}")
+        return 0
+
+
+
+def get_certificate_details(domain):
+    try:
+        context = ssl.create_default_context()
+        with socket.create_connection((domain, 443)) as sock:
+            with context.wrap_socket(sock, server_hostname=domain) as sslsock:
+                cert = sslsock.getpeercert()
+
+
+                # Certificate Authority (CA) information
+                issuer = dict(x[0] for x in cert['issuer'])
+                if 'organizationName' in issuer:
+                    ca_info = issuer['organizationName']
+                else:
+                    ca_info = issuer['commonName']
+
+
+                # Certificate validity period
+                not_before = datetime.strptime(cert['notBefore'], '%b %d %H:%M:%S %Y %Z')
+                not_after = datetime.strptime(cert['notAfter'], '%b %d %H:%M:%S %Y %Z')
+                days_to_expiry = (not_after - datetime.now()).days
+
+                # Certificate revocation status
+                revoked = False
+                for crl in cert.get('crlDistributionPoints', ()):
+                    try:
+                        crl_data = ssl.get_server_certificate((crl.split('//')[1]).split('/')[0])
+                        crl_obj = ssl.load_crl_der(ssl.PEM_to_DER_cert(crl_data))
+                        if crl_obj.get_revoked_certificate_by_serial_number(cert['serialNumber']):
+                            revoked = True
+                            break
+                    except Exception:
+                        pass
+
+                # Cipher suite
+                cipher = sslsock.cipher()
+                cipher_suite = cipher[0]
+
+                # SSL/TLS version
+                version = sslsock.version()
+
+                # Common name and Subject Alternative Names (SANs)
+                subject = dict(x[0] for x in cert['subject'])
+                common_name = subject['commonName']
+                sans = [x[1] for x in cert['subjectAltName'] if x[0] == 'DNS']
+
+                return {
+                    'issued_by': ca_info,
+                    'issued_to': common_name,
+                    'valid_from': not_before.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                    # 'sans': sans
+                    'valid_till': not_after.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                    'days_to_expiry': days_to_expiry,
+                    'version': version,
+                    'is_certificate_revoked': revoked,
+                    'cipher_suite': cipher_suite
+                    # 'chain_info': chain_info,
+                }
     except Exception as e:
         print(f"Error: {e}")
         return 0
