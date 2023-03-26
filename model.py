@@ -88,9 +88,17 @@ def whois_data(domain):
     try:
         whois_data = whois.whois(domain)
         creation_date = whois_data.creation_date
+
         if type(creation_date) is list:
             creation_date = creation_date[0]
+            whois_data['creation_date'] = [d.strftime('%Y-%m-%d %H:%M:%S') for d in whois_data.creation_date]
+        if type(whois_data.updated_date) is list:
+            whois_data['updated_date'] = [d.strftime('%Y-%m-%d %H:%M:%S') for d in whois_data.updated_date]
+        if type(whois_data.expiration_date) is list:
+            whois_data['expiration_date'] = [d.strftime('%Y-%m-%d %H:%M:%S') for d in whois_data.expiration_date]
+
         age = (datetime.now() - creation_date).days / 365
+
         return {'age':age, 'data':whois_data}
 
     except Exception as e:
