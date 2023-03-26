@@ -13,7 +13,7 @@
         </a>
 
         <div class="short-note">
-            <p>Protect yourself from <strong>phishing attacks</strong> with the help of <strong>FOSS</strong>. Surf safe with <strong>SafeSurf</strong>!</p>
+            <p>Protect yourself from <strong>phishing attacks</strong> with the help of <strong>FOSS</strong>. Surf safe with <strong>SafeSurf</strong>.</p>
         </div>
 
         <form action="/" method="post">
@@ -26,12 +26,15 @@
 
             {% if output.status == "SUCCESS" %}
 
+            URL : {{output.url}} <br>
+            <strong>Trust Score : {{output.trust_score}} / 100 </strong>
+            
+            <br><br>
+
             <a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">View URL safely within SafeSurf</button></a>
             <br><br>(External scripts are disabled for your safety.)
-            <br><br> URL : {{output.url}} <br>
-            <strong>Trust Score : {{output.trust_score}} / 100 </strong>
 
-            <br><br>
+            <br><br><br>
 
             <strong>Info for Nerds</strong>
 
@@ -76,7 +79,7 @@
                     </tr>
 
                     <tr>
-                        <td>IP Address of Domain</td>
+                        <td>IP of Domain</td>
                         <td>{{output.ip}}</td>
                     </tr>
 
@@ -151,3 +154,4 @@
 </body>
 
 </html>
+
