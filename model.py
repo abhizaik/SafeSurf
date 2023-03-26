@@ -88,6 +88,7 @@ def whois_data(domain):
     try:
         whois_data = whois.whois(domain)
         creation_date = whois_data.creation_date
+        data = {}
 
         if type(creation_date) is list:
             creation_date = creation_date[0]
@@ -99,11 +100,22 @@ def whois_data(domain):
 
         age = (datetime.now() - creation_date).days / 365
 
-        return {'age':age, 'data':whois_data}
+        for prop in whois_data:
+            if type(whois_data[prop]) is list:
+                data[pascal_case(prop)] = ', '.join(whois_data[prop])
+            else:
+                data[pascal_case(prop)] = whois_data[prop]
+
+        return {'age':age, 'data':data}
 
     except Exception as e:
         print(f"Error: {e}")
         return False
+
+
+def pascal_case(s):
+    result = s.replace('_',' ').title()
+    return result
 
 
 # check for HSTS support
@@ -299,15 +311,15 @@ def get_certificate_details(domain):
                 sans = [x[1] for x in cert['subjectAltName'] if x[0] == 'DNS']
 
                 return {
-                    'issued_by': ca_info,
-                    'issued_to': common_name,
-                    'valid_from': not_before.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                    'Issued By': ca_info,
+                    'Issued To': common_name,
+                    'Valid From': not_before.strftime('%Y-%m-%d %H:%M:%S %Z'),
                     # 'sans': sans
-                    'valid_till': not_after.strftime('%Y-%m-%d %H:%M:%S %Z'),
-                    'days_to_expiry': days_to_expiry,
-                    'version': version,
-                    'is_certificate_revoked': revoked,
-                    'cipher_suite': cipher_suite
+                    'Valid Till': not_after.strftime('%Y-%m-%d %H:%M:%S %Z'),
+                    'Days to Expiry': days_to_expiry,
+                    'Version': version,
+                    'Is Certificate Revoked': revoked,
+                    'Cipher Suite': cipher_suite
                     # 'chain_info': chain_info,
                 }
     except Exception as e:

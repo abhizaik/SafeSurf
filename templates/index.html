@@ -75,7 +75,7 @@
 
                     <tr>
                         <td>URL Redirects</td>
-                        <td>{% if output.url_redirects == 0%} NO {% else %} URL redirects to {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</td>
+                        <td>{% if output.url_redirects == 0%} NO {% else %}  {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</td>
                     </tr>
 
                     <tr>
@@ -98,6 +98,34 @@
 
             <br><br>
 
+
+
+            {% if output.ssl != 0 %}
+            
+            <strong> SSL Certificate Details </strong>
+            <br><br>
+
+            <table class="table-view">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in output.ssl.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+
+
+            <br><br>
             <strong> WHOIS Data </strong>
             <br><br>
 
@@ -119,28 +147,7 @@
             </table>
 
 
-            {% if output.ssl != 0 %}
-            <br><br>
-            <strong> SSL Certificate Details </strong>
-            <br><br>
-
-            <table class="table-view">
-                <thead>
-                    <tr>
-                        <th>Property</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for key, value in output.ssl.items() %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% endif %}
+            
 
 
             {% else %} URL : {{output.url}} <br> Message : {{output.msg}} <br> {% endif %}
