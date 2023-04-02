@@ -35,10 +35,7 @@ PROPERTY_SCORE_WEIGHTAGE = {
 def validate_url(url):
     try:
         response = requests.get(url)
-        if(response.status_code == 200):
-            return True
-        else:
-            return False
+        return response.status_code
 
     except requests.exceptions.RequestException:
         return False
@@ -98,7 +95,10 @@ def whois_data(domain):
         if type(whois_data.expiration_date) is list:
             whois_data['expiration_date'] = [d.strftime('%Y-%m-%d %H:%M:%S') for d in whois_data.expiration_date]
 
-        age = (datetime.now() - creation_date).days / 365
+        if creation_date == None:
+            age = 'Not Given'
+        else:
+            age = (datetime.now() - creation_date).days / 365 
 
         for prop in whois_data:
             if type(whois_data[prop]) is list:
@@ -255,7 +255,6 @@ def phishtank_search(url):
 def get_ip(domain):
 
     try:
-        print(domain)
         ip = socket.gethostbyname(domain)
         return ip
 

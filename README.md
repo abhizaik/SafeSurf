@@ -1,5 +1,5 @@
 
-<img src="static/safesurf-normal.png"  width="400" height="100">
+<img src="static/safesurf-normal.png"  width="350" height="88">
 
 
 # SafeSurf
@@ -14,31 +14,81 @@ These are the features provided by SafeSurf to its users.
 - Users can see the preview of the website without actually visiting it.
 - SafeSurf gives a trust score to the URL, which will provide the user an understanding of the trustability and authenticity of the domain.
 - The URL is checked with a phish database (PhishTank) to see whether it is a reported phishing link.
-- SafeSurf provides crucial details regarding the domain, which will help the user to get a basic understanding of the URL.
+- SafeSurf provides crucial details (WHOIS, SSL and general) regarding the domain, which will help the user to get a basic understanding of the URL.
 
 ## Demo
 
 https://safesurf.vercel.app
 
-<img src="static/safesurf-screenshot.png"  width="400" height="200">
+<img src="static/safesurf-screenshot.png"  width="350" height="175">
+<br>
 
+## Local Setup
+If you find this project useful or interesting, please consider starring it and putting it on your watch list.
+To run the application on your system, follow these steps:
 
-## License
+1. Clone the repository: 
 
-[MIT](https://en.wikipedia.org/wiki/MIT_License)
+```console
+git clone https://github.com/incogGod/SafeSurf.git
+cd SafeSurf
+```
 
+2. Install the dependencies: 
 
-<!-- ## Contributing
+```console
+pip install -r requirements.txt
+```
 
-Contributions are always welcome!
+3. Start the Flask app: 
 
-See `contributing.md` for ways to get started. -->
+```console
+python app.py
+```
 
+4. Open your web browser and go to http://localhost:5000 to use the application locally.
 
+## Contributing
+
+Contributions are always welcome. If you find this project useful or interesting, please consider starring it and putting it on your watch list. If you want to contribute to the project, here's how you can do it:
+
+1. Fork the repository to your GitHub account
+2. Clone the forked repository to your local machine: 
+
+```console
+git clone https://github.com/yourusername/SafeSurf.git
+```
+
+1. Create a new branch for your changes:
+
+```console
+git checkout -b my-feature-branch
+```
+
+4. Make your changes to the code
+5. Commit your changes: 
+
+```console
+git commit -am "Added a new feature"
+```
+
+6. Push your changes to your forked repository: 
+
+```console
+git push origin my-feature-branch
+```
+
+7. Create a pull request from your forked repository to the main repository
+8. Wait for your changes to be reviewed and merged
+   
+
+Before starting to work on the feature, create an issue on the main repo and get assigned.
 
 ## Feedback
 
-If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/. Any input is highly appreciated.
+If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/
+
+Any input is highly appreciated.
 
 
 <!-- ## Authors

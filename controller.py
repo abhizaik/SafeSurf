@@ -11,7 +11,7 @@ def main(url):
     try:
 
         # input validattion
-        url = model.include_protocol(url.lower())
+        url = model.include_protocol(url)
         url_validation = model.validate_url(url)
 
         # default data
@@ -25,17 +25,20 @@ def main(url):
 
         # ================== starting url assessment ==================
 
-        # phishtank check   
+        # phishtank check
         phishtank_response = model.phishtank_search(url)
         if phishtank_response:
             response = {'status': 'SUCCESS', 'url': url,
                         'msg': "This is a verified phishing link."}
             return response
 
-        if (not url_validation):
-            response = {'status': 'ERROR', 'url': url, 'msg': "Link is not valid."}
-            return response
+        # if (url_validation == False):
+        #     response = {'status': 'ERROR', 'url': url, 'msg': "Link is not valid."}
+        #     return response
 
+
+        # website status
+        response['response_status'] = url_validation
 
         # domain_rank
         domain_rank = model.get_domain_rank(domain)
@@ -46,10 +49,13 @@ def main(url):
             response['rank'] = '10,00,000+'
 
 
-        # domain_age whois_data
+        # domain_age and whois_data
         whois_data = model.whois_data(domain)
         trust_score = model.calculate_trust_score(trust_score, 'domain_age', whois_data['age'])
-        response['age'] = str(round(whois_data['age'],1)) + ' year(s)'
+        if whois_data['age'] == 'Not Given':
+            response['age'] = whois_data['age']
+        else:
+            response['age'] = str(round(whois_data['age'],1)) + ' year(s)'
         response['whois'] = whois_data['data']
 
 
