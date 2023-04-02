@@ -29,20 +29,20 @@ To run the application on your system, follow these steps:
 
 1. Clone the repository: 
 
-```console
+```shell
 git clone https://github.com/incogGod/SafeSurf.git
 cd SafeSurf
 ```
 
 2. Install the dependencies: 
 
-```console
+```shell
 pip install -r requirements.txt
 ```
 
 3. Start the Flask app: 
 
-```console
+```shell
 python app.py
 ```
 
@@ -55,26 +55,26 @@ Contributions are always welcome. If you find this project useful or interesting
 1. Fork the repository to your GitHub account
 2. Clone the forked repository to your local machine: 
 
-```console
+```shell
 git clone https://github.com/yourusername/SafeSurf.git
 ```
 
 1. Create a new branch for your changes:
 
-```console
+```shell
 git checkout -b my-feature-branch
 ```
 
 4. Make your changes to the code
 5. Commit your changes: 
 
-```console
-git commit -am "Added a new feature"
+```shell
+git commit -m "Added a new feature"
 ```
 
 6. Push your changes to your forked repository: 
 
-```console
+```shell
 git push origin my-feature-branch
 ```
 
@@ -82,7 +82,7 @@ git push origin my-feature-branch
 8. Wait for your changes to be reviewed and merged
    
 
-Before starting to work on the feature, create an issue on the main repo and get assigned.
+Before beginning to work on the feature, please [create an issue](https://github.com/incogGod/SafeSurf/issues) and get assigned.
 
 ## Feedback
 
