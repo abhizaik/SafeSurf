@@ -18,14 +18,14 @@ global BASE_SCORE
 global PROPERTY_SCORE_WEIGHTAGE
 BASE_SCORE = 50  # default trust_ score of url out of 100
 PROPERTY_SCORE_WEIGHTAGE = {
-    'domain_rank': 0.6,
-    'domain_age': 0.4,
-    'is_url_shortened': 0.2,
+    'domain_rank': 0.9,
+    'domain_age': 0.3,
+    'is_url_shortened': 0.8,
     'hsts_support': 0.1,
     'ip_present': 0.8,
-    'url_redirects': 0.05,
-    'too_long_url': 0.05,
-    'too_deep_url': 0.1,
+    'url_redirects': 0.2,
+    'too_long_url': 0.1,
+    'too_deep_url': 0.5,
     'content': 0.1
 }
 
@@ -52,13 +52,13 @@ def include_protocol(url):
 # get domain rank if it exists in top 1M list
 def get_domain_rank(domain):
     
-    with open('sorted-top1million.txt') as f:
+    with open('static/data/sorted-top1million.txt') as f:
         top1million = f.read().splitlines()
 
     is_in_top1million = binary_search(top1million, domain)
 
     if is_in_top1million == 1:
-        with open('domain-rank.json', 'r') as f:
+        with open('static/data/domain-rank.json', 'r') as f:
             domain_rank_dict = json.load(f)
         rank = domain_rank_dict.get(domain, 0)
         return int(rank)
@@ -134,7 +134,7 @@ def hsts_support(url): # url should be http / https as prefix
 # check for URL shortening services
 def is_url_shortened(domain): 
     try:
-        with open('url-shorteners.txt') as f:
+        with open('static/data/url-shorteners.txt') as f:
             services_arr = f.read().splitlines()
         
         for service in services_arr:
@@ -347,9 +347,9 @@ def calculate_trust_score(current_score, case, value):
         elif value < 100000:  # in top 1L rank
             score = current_score + (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE)
         elif value < 500000:  # in 1L - 5L rank
-            score = current_score + (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE * 0.5)
+            score = current_score + (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE * 0.8)
         else:  # in 5L - 10L rank
-            score = current_score + (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE * 0.25)
+            score = current_score + (PROPERTY_SCORE_WEIGHTAGE['domain_rank'] * BASE_SCORE * 0.6)
         return score
 
     elif case == 'domain_age':

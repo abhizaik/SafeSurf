@@ -51,6 +51,14 @@ form {
     padding-bottom: 5%;
 }
 
+.preview-form {
+    padding-bottom: 0;
+}
+
+.source-code-form {
+    padding-bottom: 0;
+}
+
 input[type="text"] {
     border: none;
     border-radius: 0.5rem;
@@ -80,11 +88,14 @@ button[type="submit"]:hover {
 .preview-button {
     border: none;
     border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 10px;
     font-size: 1rem;
     background-color: #4350da;
     color: #fff;
     cursor: pointer;
+    width: 290px;
+    margin-top: 10px;
+    margin-bottom: 5px;
     transition: background-color 0.2s ease;
 }
 

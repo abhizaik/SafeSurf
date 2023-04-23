@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View Source Code</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="incogGod">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: Consolas, monospace;
+            font-size: 16px;
+        }
+        
+        pre {
+            background-color: #000;
+            padding: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <pre>{{ formatted_html }}</pre>
+    </div>
+</body>
+
+</html>

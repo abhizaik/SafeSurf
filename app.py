@@ -4,6 +4,8 @@ import requests
 import urllib.parse
 from urllib.parse import urljoin
 import controller
+import json
+import html
 
 app = Flask(__name__)
 @app.route('/',  methods=['GET','POST'])
@@ -19,12 +21,34 @@ def home():
     return render_template('index.html', output=output)
 
 
+# Old /preview 
+# @app.route('/preview/<path:url>')
+# def preview(url):
+#     try:
+#         # url = urllib.parse.unquote(url, encoding='ISO-8859-1')
+#         url = 'https://' + url
+#         response = requests.get(url)
+#         soup = BeautifulSoup(response.content, 'html.parser')
 
-@app.route('/preview/<path:url>')
-def preview(url):
+#         # inject external resources into HTML
+#         for link in soup.find_all('link'):
+#             if link.get('href'):
+#                 link['href'] = urljoin(url, link['href'])
+#         # for script in soup.find_all('script'):
+#         #     if script.get('src'):
+#         #         script['src'] = urljoin(url, script['src'])
+#         for img in soup.find_all('img'):
+#             if img.get('src'):
+#                 img['src'] = urljoin(url, img['src'])
+
+#         return render_template('preview.html', content=soup.prettify())
+#     except Exception as e:
+#         return  f"Error: {e}"
+
+@app.route('/preview', methods=['POST'])
+def preview():
     try:
-        # url = urllib.parse.unquote(url, encoding='ISO-8859-1')
-        url = 'https://' + url
+        url = request.form.get('url')
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -32,9 +56,12 @@ def preview(url):
         for link in soup.find_all('link'):
             if link.get('href'):
                 link['href'] = urljoin(url, link['href'])
+        
+        # Uncomment this if you want to enable script
         # for script in soup.find_all('script'):
         #     if script.get('src'):
         #         script['src'] = urljoin(url, script['src'])
+
         for img in soup.find_all('img'):
             if img.get('src'):
                 img['src'] = urljoin(url, img['src'])
@@ -42,6 +69,17 @@ def preview(url):
         return render_template('preview.html', content=soup.prettify())
     except Exception as e:
         return  f"Error: {e}"
+
+
+@app.route('/source-code', methods=['GET','POST'])
+def view_source_code():
+
+    url = request.form.get('url')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    formatted_html = soup.prettify()
+    
+    return render_template('source_code.html', formatted_html=formatted_html)
 
 
 if __name__ == '__main__':

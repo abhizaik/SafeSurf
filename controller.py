@@ -16,10 +16,7 @@ def main(url):
 
         # default data
         domain = tldextract.extract(url).domain + '.' + tldextract.extract(url).suffix
-        parsed_url = urlparse(url)
-        encoded_url = quote(url, safe='')
-        encoded_url = parsed_url.netloc + parsed_url.path + parsed_url.params + parsed_url.query + parsed_url.fragment
-        response = {'status': 'SUCCESS', 'url': url, 'encoded_url' : encoded_url, 'msg': "URL is valid."}
+        response = {'status': 'SUCCESS', 'url': url, 'msg': "URL is valid."}
         trust_score = BASE_SCORE
 
 
@@ -115,6 +112,6 @@ def main(url):
 
 
     except Exception as e:
-        # print(f"Error: {e}")
-        response = {'status': 'ERROR', 'url': url, 'msg': "Some Error Occurred."}
+        print(f"Error: {e}")
+        response = {'status': 'ERROR', 'url': url, 'msg': "Some error occurred, please check the URL."}
         return response

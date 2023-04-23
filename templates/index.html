@@ -43,11 +43,22 @@
             </strong>
             
             <br><br>
-
-            <a href="{{ url_for('preview', url=output.encoded_url) }}" target="_blank" rel="noopener noreferrer"><button class = "preview-button">View URL safely within SafeSurf</button></a>
-            <input type="hidden" id="url-input" name="url-input" value= {{ output.encoded_url }}>
             
-            <!-- <button class = "preview-button" onclick=previewRequest()>View URL safely within SafeSurf</button> -->
+            <form id="preview" class="preview-form" action="{{ url_for('preview')}}" method="POST" target="_blank">
+                <input type="hidden" name="url" value="{{output.url}}">
+            </form>
+
+            <button class = "preview-button" onclick="document.getElementById('preview').submit()">View URL safely within SafeSurf</button>
+
+            
+            
+            <form id="source-code" class="source-code-form" action="{{ url_for('view_source_code')}}" method="POST" target="_blank">
+                <input type="hidden" name="url" value="{{output.url}}">
+            </form>
+
+            <button class = "preview-button" onclick="document.getElementById('source-code').submit()">View Source Code</button>
+
+
             
             <br><br>(External scripts are disabled for your safety.)
 
