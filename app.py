@@ -79,7 +79,7 @@ def view_source_code():
     soup = BeautifulSoup(response.content, 'html.parser')
     formatted_html = soup.prettify()
     
-    return render_template('source_code.html', formatted_html=formatted_html)
+    return render_template('source_code.html', formatted_html = formatted_html, url = url)
 
 
 if __name__ == '__main__':
