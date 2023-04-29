@@ -59,7 +59,7 @@ Contributions are always welcome. If you find this project useful or interesting
 git clone https://github.com/yourusername/SafeSurf.git
 ```
 
-1. Create a new branch for your changes:
+3. Create a new branch for your changes:
 
 ```shell
 git checkout -b my-feature-branch
@@ -82,11 +82,11 @@ git push origin my-feature-branch
 8. Wait for your changes to be reviewed and merged
    
 
-Before beginning to work on the feature, please [create an issue](https://github.com/incogGod/SafeSurf/issues) and get assigned.
+<!-- Before beginning to work on the feature, please [create an issue](https://github.com/incogGod/SafeSurf/issues) and get assigned. -->
 
 ## Feedback
 
-If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/
+If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/ or start a discussion on [SafeSurf Discussions](https://github.com/incogGod/SafeSurf/discussions).
 
 Any input is highly appreciated.
 
