@@ -26,22 +26,28 @@
 
             {% if output.status == "SUCCESS" %}
 
-            URL : {{output.url}} <br>
+            
             <!-- <strong>Trust Score : {{output.trust_score}} / 100 </strong> -->
             <strong>
 
                 {% if output.trust_score >= 0 and output.trust_score < 60 %}
-                <span style="color: red">Trust Score : {{output.trust_score}} / 100</span>
+                <span style="color: red; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
                 {% elif output.trust_score >= 60 and output.trust_score < 70 %}
-                <span style="color: orange">Trust Score : {{output.trust_score}} / 100</span>
+                <span style="color: orange; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
                 {% elif output.trust_score >= 70 and output.trust_score < 90 %}
-                <span style="color: yellowgreen">Trust Score : {{output.trust_score}} / 100</span>
+                <span style="color: yellowgreen; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
                 {% else %}
-                <span style="color: green">Trust Score : {{output.trust_score}} / 100</span>
-                {% endif %}
+                <span style="color: green; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
+                {% endif %} 
 
             </strong>
             
+            <br>
+            URL : {{output.url}}
+
+            {% if output.response_status != False %}
+                
+                
             <br><br>
             
             <form id="preview" class="preview-form" action="{{ url_for('preview')}}" method="POST" target="_blank">
@@ -57,12 +63,21 @@
             </form>
 
             <button class = "preview-button" onclick="document.getElementById('source-code').submit()">Show Source Code of URL</button>
-
-
             
             <br><br>(External scripts are disabled for your safety.)
 
+            {% else %}
+
+               <br><br>
+               This page is currently down.
+
+            {% endif %}
+
+
+
+
             <br><br><br>
+
 
             <strong>Info for Nerds</strong>
 
