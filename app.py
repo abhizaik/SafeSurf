@@ -34,6 +34,8 @@ def home():
     except Exception as e:
         print(e)
         output = 'NA'
+        return e
+
 
     return render_template('index.html', output=output)
 
