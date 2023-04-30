@@ -18,27 +18,12 @@ def home():
     
     try:
         url = request.form['url']
-        url = model.include_protocol(url)
-        cache_result = client.get(url)
-
-        if cache_result != None:
-            cache_result = cache_result.decode('utf-8')
-            result = json.loads(cache_result)
-        else:
-            result = controller.main(url)
-            result_value = json.dumps(result)
-            client.set(url, result_value, 604800)
-
+        result = controller.main(url)
         output = result
-        print(output)
-    except Exception as e:
-        print(e)
+    except:
         output = 'NA'
-        return e
-
 
     return render_template('index.html', output=output)
-
 
 
 @app.route('/preview', methods=['POST'])
