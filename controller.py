@@ -16,7 +16,7 @@ def main(url):
 
         # default data
         domain = tldextract.extract(url).domain + '.' + tldextract.extract(url).suffix
-        response = {'status': 'SUCCESS', 'url': url, 'msg': "URL is valid."}
+        response = {'status': 'SUCCESS', 'url': url}
         trust_score = BASE_SCORE
 
 
@@ -25,17 +25,12 @@ def main(url):
         # phishtank check
         phishtank_response = model.phishtank_search(url)
         if phishtank_response:
-            response = {'status': 'SUCCESS', 'url': url,
-                        'msg': "This is a verified phishing link."}
-            return response
-
-        # if (url_validation == False):
-        #     response = {'status': 'ERROR', 'url': url, 'msg': "Link is not valid."}
-        #     return response
+            response['msg'] = "This is a verified phishing link."
 
 
         # website status
         response['response_status'] = url_validation
+
 
         # domain_rank
         domain_rank = model.get_domain_rank(domain)
@@ -107,7 +102,6 @@ def main(url):
 
         trust_score = int(max(min(trust_score, 100), 0))
         response['trust_score']= trust_score
-        response['msg']= 'Assessment finished successfully.'
         return response
 
 

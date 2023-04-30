@@ -1,21 +1,38 @@
 from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
+from pymemcache.client.base import Client
 import requests
 import urllib.parse
 from urllib.parse import urljoin
 import controller
 import json
 import html
+import model
 
 app = Flask(__name__)
+client = Client(('localhost', 11211))
+
+
 @app.route('/',  methods=['GET','POST'])
 def home():
     
     try:
         url = request.form['url']
-        result = controller.main(url)
+        url = model.include_protocol(url)
+        cache_result = client.get(url)
+
+        if cache_result != None:
+            cache_result = cache_result.decode('utf-8')
+            result = json.loads(cache_result)
+        else:
+            result = controller.main(url)
+            result_value = json.dumps(result)
+            client.set(url, result_value, 604800)
+
         output = result
-    except:
+        print(output)
+    except Exception as e:
+        print(e)
         output = 'NA'
 
     return render_template('index.html', output=output)

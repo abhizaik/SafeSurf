@@ -45,6 +45,11 @@
             <br>
             URL : {{output.url}}
 
+            {% if output.msg is defined %}
+                <br>
+              {{output.msg}}
+            {% endif %}
+
             {% if output.response_status != False %}
                 
                 
@@ -69,7 +74,7 @@
             {% else %}
 
                <br><br>
-               This page is currently down.
+               Can not access this page at the moment. Page may be down or may have blocked viewing with scripts.
 
             {% endif %}
 
