@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
-from pymemcache.client.base import Client
 import requests
 import urllib.parse
 from urllib.parse import urljoin
