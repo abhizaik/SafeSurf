@@ -9,7 +9,6 @@ import html
 import model
 
 app = Flask(__name__)
-client = Client(('localhost', 11211))
 
 
 @app.route('/',  methods=['GET','POST'])
