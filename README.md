@@ -86,7 +86,7 @@ git push origin my-feature-branch
 
 ## Feedback
 
-If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/ or start a discussion on [SafeSurf Discussions](https://github.com/incogGod/SafeSurf/discussions).
+If you have any feedback or suggestions, please reach out at https://abhishekkp.com/contact/ or start a discussion on [SafeSurf Discussions](https://github.com/abhizaik/SafeSurf/discussions).
 
 Any input is highly appreciated.
 
