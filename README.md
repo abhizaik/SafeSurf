@@ -30,7 +30,7 @@ To run the application on your system, follow these steps:
 1. Clone the repository: 
 
 ```shell
-git clone https://github.com/incogGod/SafeSurf.git
+git clone https://github.com/abhizaik/SafeSurf.git
 cd SafeSurf
 ```
 
@@ -82,18 +82,18 @@ git push origin my-feature-branch
 8. Wait for your changes to be reviewed and merged
    
 
-<!-- Before beginning to work on the feature, please [create an issue](https://github.com/incogGod/SafeSurf/issues) and get assigned. -->
+<!-- Before beginning to work on the feature, please [create an issue](https://github.com/abhizaik/SafeSurf/issues) and get assigned. -->
 
 ## Feedback
 
-If you have any feedback or suggestions, please reach out at https://incoggod.com/contact/ or start a discussion on [SafeSurf Discussions](https://github.com/incogGod/SafeSurf/discussions).
+If you have any feedback or suggestions, please reach out at https://abhishekkp.com/contact/ or start a discussion on [SafeSurf Discussions](https://github.com/abhizaik/SafeSurf/discussions).
 
 Any input is highly appreciated.
 
 
 <!-- ## Authors
 
-- [@incogGod](https://www.github.com/incogGod) -->
+abhizaik- [@](https://www.github.com/abhizaik) -->
 
 
 
