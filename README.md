@@ -25,7 +25,28 @@ https://safesurf.vercel.app
 
 ## Local Setup
 If you find this project useful or interesting, please consider starring it and putting it on your watch list.
-To run the application on your system, follow these steps:
+
+To run the application on your system, you can choose one of the following methods:
+
+#### A. Using Docker (Recommended)
+If you have Docker installed on your computer, you can easily run the application by executing the following commands.
+
+1. Clone the repository: 
+
+```shell
+git clone https://github.com/abhizaik/SafeSurf.git
+cd SafeSurf
+```
+
+2. Start the container
+```shell
+docker-compose up -d
+```
+
+3. Open your web browser and go to http://localhost:5000 to use the application locally.
+
+#### B. Manual Setup
+Alternatively, you can manually set up the project by following these steps. Note that you may encounter issues with Python libraries, depending on your Python version and the libraries already installed on your system.
 
 1. Clone the repository: 
 
