@@ -28,7 +28,7 @@ If you find this project useful or interesting, please consider starring it and 
 
 To run the application on your system, you can choose one of the following methods:
 
-#### A. Using Docker (Recommended)
+### A. Using Docker (Recommended)
 If you have Docker installed on your computer, you can easily run the application by executing the following commands.
 
 1. Clone the repository: 
@@ -45,7 +45,7 @@ docker-compose up -d
 
 3. Open your web browser and go to http://localhost:5000 to use the application locally.
 
-#### B. Manual Setup
+### B. Manual Setup
 Alternatively, you can manually set up the project by following these steps. Note that you may encounter issues with Python libraries, depending on your Python version and the libraries already installed on your system.
 
 1. Clone the repository: 
@@ -69,7 +69,10 @@ python app.py
 
 4. Open your web browser and go to http://localhost:5000 to use the application locally.
 
-## Contributing
+
+<details>
+  <summary><h2> Contributing </h2></summary>
+  
 
 Contributions are always welcome. If you find this project useful or interesting, please consider starring it and putting it on your watch list. If you want to contribute to the project, here's how you can do it:
 
@@ -90,7 +93,7 @@ git checkout -b my-feature-branch
 5. Commit your changes: 
 
 ```shell
-git commit -m "Added a new feature"
+git commit -m "your commit message"
 ```
 
 6. Push your changes to your forked repository: 
@@ -102,22 +105,14 @@ git push origin my-feature-branch
 7. Create a pull request from your forked repository to the main repository
 8. Wait for your changes to be reviewed and merged
    
+   </details>
 
-<!-- Before beginning to work on the feature, please [create an issue](https://github.com/abhizaik/SafeSurf/issues) and get assigned. -->
 
 ## Feedback
 
 If you have any feedback or suggestions, please reach out at https://abhishekkp.com/contact/ or start a discussion on [SafeSurf Discussions](https://github.com/abhizaik/SafeSurf/discussions).
 
 Any input is highly appreciated.
-
-
-<!-- ## Authors
-
-abhizaik- [@](https://www.github.com/abhizaik) -->
-
-
-
 
 
 <!-- # URL Assessment Criteria
