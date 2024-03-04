@@ -55,28 +55,30 @@ This function is the entry point for URL assessment. It takes a URL as input and
    - The trust score is initialized with the base score.
 
 3. **URL Assessment**:
+
    - Phishtank Check: It checks if the URL is listed as a phishing link in the Phishtank database.
    - Website Status: It determines the status of the website's response using the `validate_url()` function from the `model` module.
-   - Domain Rank: It retrieves the domain rank using the `get_domain_rank()` function from the `model` module.
-   - Domain Age: It retrieves WHOIS data to determine the domain's age and includes it in the response.
-   - URL Shortening: It checks if the URL is shortened.
-   - HSTS Support: It checks if the website supports HTTP Strict Transport Security (HSTS).
-   - IP Presence: It checks for the presence of an IP address associated with the domain.
-   - URL Redirects: It checks for URL redirects.
-   - URL Length: It checks if the URL is too long.
-   - URL Depth: It checks if the URL depth is too deep.
+   - Domain Rank: It retrieves the domain rank using the `get_domain_rank()` function from the `model` module. Authentic websites typically have high traffic volume, indicating popularity and reliability.
+   - Domain Age: It retrieves WHOIS data to determine the domain's age and includes it in the response. The age of a domain is determined using WHOIS data. Websites less than 2 years old may raise suspicion.
+   - URL Shortening: Check for the use of URL shortening services, which can obscure the original URL and potentially indicate malicious intent.
+   - HSTS Support: It checks if the website supports HTTP Strict Transport Security (HSTS). Verify if the domain supports HTTPS and HSTS. Legitimate domains often prioritize security with HSTS support.
+   - IP Presence: It checks for the presence of an IP address associated with the domain. Phishing links may use IP addresses instead of domain names. Authentic domains typically have dedicated domain names.
+   - URL Redirects: It checks for URL redirects. Redirection to other pages can be a tactic to hide the original phishing link.
+   - URL Length: It checks if the URL is too long. URLs exceeding 75 characters may indicate phishing attempts, as attackers may try to conceal suspicious parts in the address bar.
+   - URL Depth: It checks if the URL depth is too deep. Excessive depth in the URL structure (number of '/') raises suspicion, as legitimate websites typically have simpler structures.
 
-4. **IP Address and SSL Certificate**:
+
+1. **IP Address and SSL Certificate**:
    - It retrieves the IP address associated with the domain and includes it in the response.
    - It retrieves SSL certificate details using the `get_certificate_details()` function from the `model` module.
 
-5. **Trust Score Calculation**:
-   - The trust score is calculated based on the results of the assessments.
+2. **Trust Score Calculation**:
+   - The trust score is calculated based on the results of the assessments. 
 
-6. **Response Generation**:
-   - A response dictionary containing the assessment results, including the trust score, is returned.
+3. **Response Generation**:
+   - A response JSON containing the assessment results, including the trust score, is returned.
 
-7. **Error Handling**:
+4. **Error Handling**:
    - Any exceptions that occur during the assessment process are caught, and an error response is generated with details of the error.
 
 This function provides a comprehensive assessment of the trustworthiness of the input URL by conducting various checks and calculations, encapsulating the results in a response dictionary.
@@ -88,7 +90,7 @@ The `model.py` file contains various functions responsible for conducting differ
 
 ### Global Variables
 - `BASE_SCORE`: This variable holds the default trust score for a URL out of 100. It is initialized to 50.
-- `PROPERTY_SCORE_WEIGHTAGE`: This dictionary holds the weightage of different properties in determining the trust score.
+- `PROPERTY_SCORE_WEIGHTAGE`: This dictionary holds the weightage of different properties in determining the trust score. Score is added according to the weightage given for each parameters, the value of the weightage is found out through trials and referring papers (there is no any standard value for it).
 
 ### Function: `validate_url(url)`
 This function checks whether the provided URL is active by making a request to it. It returns the HTTP response status code if the URL is reachable; otherwise, it returns `False`.
