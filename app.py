@@ -1,12 +1,8 @@
 from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
 import requests
-import urllib.parse
 from urllib.parse import urljoin
 import controller
-import json
-import html
-import model
 
 app = Flask(__name__)
 

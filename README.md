@@ -70,10 +70,30 @@ python app.py
 4. Open your web browser and go to http://localhost:5000 to use the application locally.
 
 
-<details>
-  <summary><h2> Contributing </h2></summary>
+## Learn and Contribute to the Project
   
+  <details>
+  <summary> <b> Learn How SafeSurf Works </b> </summary>
 
+  ### Project Functionality Overview
+
+This section explains the functionality and inner workings of the project, detailing its key components and processes.
+
+### API Endpoints 
+- `/`: Homepage of the application where users can input a URL to assess its safety.
+- `/preview`: Endpoint to view a preview of the website within SafeSurf.
+- `/source-code`: Endpoint to view the source code of a website.
+
+[Click HERE to view the detailed code documentaion of SafeSurf](README-HOW-SAFESURF-WORKS.md)
+
+
+
+</details>
+
+<details>
+  <summary> <b> Learn How to Contribute to SafeSurf </b> </summary>
+
+### Contributing Guidelines
 Contributions are always welcome. If you find this project useful or interesting, please consider starring it and putting it on your watch list. If you want to contribute to the project, here's how you can do it:
 
 1. Fork the repository to your GitHub account
@@ -86,7 +106,7 @@ git clone https://github.com/yourusername/SafeSurf.git
 3. Create a new branch for your changes:
 
 ```shell
-git checkout -b my-feature-branch
+git checkout -b name-of-your-branch
 ```
 
 4. Make your changes to the code
@@ -99,7 +119,7 @@ git commit -m "your commit message"
 6. Push your changes to your forked repository: 
 
 ```shell
-git push origin my-feature-branch
+git push origin name-of-your-branch
 ```
 
 7. Create a pull request from your forked repository to the main repository
