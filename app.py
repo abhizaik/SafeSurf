@@ -2,9 +2,10 @@ from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
 import requests
 from urllib.parse import urljoin
-import controller
+from controller import Controller
 
 app = Flask(__name__)
+controller = Controller()
 
 
 @app.route('/',  methods=['GET','POST'])
