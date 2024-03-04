@@ -1,13 +1,12 @@
+import os
 import json
 import csv
 import time
-import os
-
 
 """
 This is a one-time script to update the `sorted-top1million.txt` and `domain-rank.json` files with the latest list of top 1 million websites.
 
-The latest `top-1m.csv` can be downloaded from [Tranco List](https://tranco-list.eu/) (this CSV is updated every month). 
+The latest `top-1m.csv` can be downloaded from Tranco List(https://tranco-list.eu/) (this CSV is updated every month). 
 In this `onetimescript.py`, we read the file `/static/data/top-1m.csv`, populate data, and store it into a sorted list (`sorted-top1million.txt`) and a JSON file (`domain-rank.json`) for easy access while assessing URLs.
 
 If you want to update the list and JSON on your local machine, follow these steps:
@@ -18,53 +17,59 @@ If you want to update the list and JSON on your local machine, follow these step
 Last Executed Date With Latest top-1m.csv : 2024-03-04
 """
 
+class OneTimeScript:
+    def __init__(self):
+        self.file_path = 'static/data/top-1m.csv'
+        self.output_txt_path = 'static/data/sorted-top1million.txt'
+        self.output_json_path = 'static/data/domain-rank.json'
 
-def create_sorted_arr_and_dict():
-
-    try:
-
-        if not os.path.exists('static/data/top-1m.csv'):   
+    def check_file_existence(self):
+        # Check if the required file exists
+        if not os.path.exists(self.file_path):
             print("File does not exist.")
-            print("Please add file static/data/top-1m.csv")
-            return 0
+            print("Please add file", self.file_path)
+            return False
+        return True
 
-        start = time.time()
-        domain_data_array = []
-        domain_data_dict = {}
+    def create_sorted_arr_and_dict(self):
+        # Create sorted list and dictionary from CSV data
+        try:
+            if not self.check_file_existence():
+                return False
 
-        with open('static/data/top-1m.csv', newline='') as csvfile:
-            reader = csv.reader(csvfile)
-            for row in reader:
-                domain_data_array.append(row[1]) # saving domain to list
-                domain_data_dict[row[1]] = row[0] # saving domain : rank to dict
+            start = time.time()
+            domain_data_array = []
+            domain_data_dict = {}
 
-        # Sort the list by domain name
-        sorted_domain_data = sorted(domain_data_array)
+            with open(self.file_path, newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    domain_data_array.append(row[1])  # saving domain to list
+                    domain_data_dict[row[1]] = row[0]  # saving domain : rank to dict
 
-        # Open the file in write mode to clear the contents
-        with open('static/data/sorted-top1million.txt', 'w') as outfile:
-            pass
+            # Sort the list by domain name
+            sorted_domain_data = sorted(domain_data_array)
 
-        # Save the sorted data to a new file
-        with open('static/data/sorted-top1million.txt', 'w') as outfile:
-            for row in sorted_domain_data:
-                outfile.write(row + '\n')
+            # Save the sorted data to a new file
+            with open(self.output_txt_path, 'w') as outfile:
+                for row in sorted_domain_data:
+                    outfile.write(row + '\n')
 
-        # Open the file in write mode to clear the contents
-        with open('static/data/domain-rank.json', 'w') as outfile:
-            pass
+            # Write the dictionary to the JSON file
+            with open(self.output_json_path, 'w') as outfile:
+                json.dump(domain_data_dict, outfile)
 
-        # Write the dictionary to the file
-        with open('static/data/domain-rank.json', 'w') as outfile:
-            json.dump(domain_data_dict, outfile)
+            end = time.time()
 
-        end = time.time()
+            print('Script Executed Successfully.')
+            print('Execution Time:', round(end - start, 2), 'seconds')
+            return True
 
-        print('Script Executed Successfully.')
-        print('Execution Time : ', round(end - start,2),'seconds')
-
-    except Exception as e:
-        print(f"Error: {e}")
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
 
 
-create_sorted_arr_and_dict() 
+if __name__ == "__main__":
+    script = OneTimeScript()
+    script.create_sorted_arr_and_dict()
