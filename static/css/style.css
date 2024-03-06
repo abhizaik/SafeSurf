@@ -176,6 +176,7 @@ main {
 
 #warning-message {
     font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     position: fixed;
     z-index: 9999;
