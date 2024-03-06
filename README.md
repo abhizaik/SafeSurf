@@ -84,14 +84,14 @@ This section explains the functionality and inner workings of the project, detai
 - `/preview`: Endpoint to view a preview of the website within SafeSurf.
 - `/source-code`: Endpoint to view the source code of a website.
 
-[Click HERE to view the detailed code documentaion of SafeSurf](README-HOW-SAFESURF-WORKS.md)
+[Detailed code documentaion of SafeSurf](README-HOW-SAFESURF-WORKS.md)
 
 
 
 </details>
 
 <details>
-  <summary> <b> Learn How to Contribute to SafeSurf </b> </summary>
+  <summary> <b> How to Contribute to SafeSurf </b> </summary>
 
 ### Contributing Guidelines
 Contributions are always welcome. If you find this project useful or interesting, please consider starring it and putting it on your watch list. If you want to contribute to the project, here's how you can do it:
