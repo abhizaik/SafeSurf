@@ -2,6 +2,9 @@ import os
 import json
 import csv
 import time
+from db import db, DomainRank
+from sqlalchemy.orm import sessionmaker
+
 
 """
 This is a one-time script to update the `sorted-top1million.txt` and `domain-rank.json` files with the latest list of top 1 million websites.
@@ -63,13 +66,47 @@ class OneTimeScript:
 
             print('Script Executed Successfully.')
             print('Execution Time:', round(end - start, 2), 'seconds')
-            return True
+            return {'status': 'SUCCESS', 'msg':'Execution Time: ' + round(end - start, 2) + ' seconds'}
 
         except Exception as e:
             print(f"Error: {e}")
-            return False
+            return {'status': 'ERROR', 'msg':"Error: {e}"}
+    
+
+    def populate_db_from_csv(self):
+        try:
+            start = time.time()
+            Session = sessionmaker(autoflush=False, bind=db.engine)
+            session = Session()
+            batch_size = 10000  # Adjust based on your system's capabilities
+            with open(self.file_path, 'r') as file:
+                reader = csv.reader(file)
+                batch = []
+                for index, row in enumerate(reader):
+                    batch.append({'domain_name': row[1], 'rank': int(row[0])})
+                    if (index + 1) % batch_size == 0:
+                        db.session.bulk_insert_mappings(DomainRank, batch)
+                        db.session.commit()
+                        batch = []
+                if batch:
+                    db.session.bulk_insert_mappings(DomainRank, batch)
+                    db.session.commit()
+            end = time.time()
+            return {'status': 'SUCCESS', 'msg':'Execution Time: ' + round(end - start, 2) + ' seconds'}
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return {'status': 'ERROR', 'msg':"Error: {e}"}
+
+        
 
 
-if __name__ == "__main__":
+def update_db():
     script = OneTimeScript()
-    script.create_sorted_arr_and_dict()
+    db_response = script.populate_db_from_csv()
+    return db_response
+
+def update_json():
+    script = OneTimeScript()
+    script_response = script.create_sorted_arr_and_dict()
+    return script_response

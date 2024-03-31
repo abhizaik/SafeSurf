@@ -8,10 +8,10 @@ import urllib.request
 from datetime import datetime
 import requests
 import json
-import csv
 import time
 import socket
 import ssl
+from db import DomainRank
 
 
 global BASE_SCORE
@@ -50,35 +50,18 @@ def include_protocol(url):
         return url
 
 # get domain rank if it exists in top 1M list
-def get_domain_rank(domain):
+# def get_domain_rank(domain):
     
-    with open('static/data/sorted-top1million.txt') as f:
-        top1million = f.read().splitlines()
+#     with open('static/data/domain-rank.json', 'r') as f:
+#         domain_rank_dict = json.load(f)
+#     rank = domain_rank_dict.get(domain, 0)
+#     return int(rank)
 
-    is_in_top1million = binary_search(top1million, domain)
-
-    if is_in_top1million == 1:
-        with open('static/data/domain-rank.json', 'r') as f:
-            domain_rank_dict = json.load(f)
-        rank = domain_rank_dict.get(domain, 0)
-        return int(rank)
-    else:
-        return 0
+def get_domain_rank(domain):
+    result = DomainRank.query.filter_by(domain_name=domain).first()
+    return int(result.rank) if result else 0
 
 
-# binary search
-def binary_search(arr, x):
-    low = 0
-    high = len(arr) - 1
-    while low <= high:
-        mid = (low + high) // 2
-        if arr[mid] == x:
-            return 1
-        elif arr[mid] < x:
-            low = mid + 1
-        else:
-            high = mid - 1
-    return 0
 
 # get whois data of domain
 def whois_data(domain):
