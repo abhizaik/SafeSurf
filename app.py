@@ -77,7 +77,7 @@ def update_db():
             return response, 200
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        return f"An error occurred: {str(e)}", 500
+        return "An error occurred: " + str(e), 500
 
 @app.route('/update-json')
 def update_json(): 
@@ -88,7 +88,7 @@ def update_json():
             return response, 200
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        return f"An error occurred: {str(e)}", 500
+        return "An error occurred: " + str(e), 500
 
 
 if __name__ == '__main__':

@@ -29,6 +29,8 @@ PROPERTY_SCORE_WEIGHTAGE = {
     'content': 0.1
 }
 
+with open('static/data/domain-rank.json', 'r') as f:
+        domain_rank_dict = json.load(f)
 
 
 # check whether the link is active or not
@@ -50,16 +52,15 @@ def include_protocol(url):
         return url
 
 # get domain rank if it exists in top 1M list
-# def get_domain_rank(domain):
-    
-#     with open('static/data/domain-rank.json', 'r') as f:
-#         domain_rank_dict = json.load(f)
-#     rank = domain_rank_dict.get(domain, 0)
-#     return int(rank)
-
 def get_domain_rank(domain):
-    result = DomainRank.query.filter_by(domain_name=domain).first()
-    return int(result.rank) if result else 0
+    
+    
+    rank = domain_rank_dict.get(domain, 0)
+    return int(rank)
+
+# def get_domain_rank(domain):
+#     result = DomainRank.query.filter_by(domain_name=domain).first()
+#     return int(result.rank) if result else 0
 
 
 
