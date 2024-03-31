@@ -38,7 +38,7 @@ class OneTimeScript:
         # Create sorted list and dictionary from CSV data
         try:
             if not self.check_file_existence():
-                return False
+                return {'status': 'ERROR', 'msg':"File does not exist. Please add file at " + self.file_path}
 
             start = time.time()
             domain_data_array = []
@@ -47,16 +47,16 @@ class OneTimeScript:
             with open(self.file_path, newline='') as csvfile:
                 reader = csv.reader(csvfile)
                 for row in reader:
-                    domain_data_array.append(row[1])  # saving domain to list
+                    # domain_data_array.append(row[1])  # saving domain to list
                     domain_data_dict[row[1]] = row[0]  # saving domain : rank to dict
 
-            # Sort the list by domain name
-            sorted_domain_data = sorted(domain_data_array)
+            # # Sort the list by domain name
+            # sorted_domain_data = sorted(domain_data_array)
 
-            # Save the sorted data to a new file
-            with open(self.output_txt_path, 'w') as outfile:
-                for row in sorted_domain_data:
-                    outfile.write(row + '\n')
+            # # Save the sorted data to a new file
+            # with open(self.output_txt_path, 'w') as outfile:
+            #     for row in sorted_domain_data:
+            #         outfile.write(row + '\n')
 
             # Write the dictionary to the JSON file
             with open(self.output_json_path, 'w') as outfile:
@@ -66,16 +66,20 @@ class OneTimeScript:
 
             print('Script Executed Successfully.')
             print('Execution Time:', round(end - start, 2), 'seconds')
-            return {'status': 'SUCCESS', 'msg':'Execution Time: ' + round(end - start, 2) + ' seconds'}
+            return {'status': 'SUCCESS', 'msg':'Execution Time: ' + str(round(end - start, 2)) + ' seconds'}
 
         except Exception as e:
             print(f"Error: {e}")
-            return {'status': 'ERROR', 'msg':"Error: {e}"}
+            return {'status': 'ERROR', 'msg':"Error: " + str(e)}
     
 
     def populate_db_from_csv(self):
         try:
             start = time.time()
+
+            if not self.check_file_existence():
+                return {'status': 'ERROR', 'msg':"File does not exist. Please add file at " + self.file_path}
+            
             Session = sessionmaker(autoflush=False, bind=db.engine)
             session = Session()
             batch_size = 10000  # Adjust based on your system's capabilities
@@ -92,11 +96,11 @@ class OneTimeScript:
                     db.session.bulk_insert_mappings(DomainRank, batch)
                     db.session.commit()
             end = time.time()
-            return {'status': 'SUCCESS', 'msg':'Execution Time: ' + round(end - start, 2) + ' seconds'}
+            return {'status': 'SUCCESS', 'msg':'Execution Time: ' + str(round(end - start, 2)) + ' seconds'}
 
         except Exception as e:
             print(f"Error: {e}")
-            return {'status': 'ERROR', 'msg':"Error: {e}"}
+            return {'status': 'ERROR', 'msg':"Error: " + str(e)}
 
         
 
