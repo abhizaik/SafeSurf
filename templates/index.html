@@ -26,195 +26,143 @@
 
             {% if output.status == "SUCCESS" %}
 
-            
-            <!-- <strong>Trust Score : {{output.trust_score}} / 100 </strong> -->
-            <strong>
-
+            <div class="trust-score">
                 {% if output.trust_score >= 0 and output.trust_score < 60 %}
-                <span style="color: red; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
+                <span class="low">Trust Score : {{output.trust_score}} / 100</span>
                 {% elif output.trust_score >= 60 and output.trust_score < 70 %}
-                <span style="color: orange; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
+                <span class="medium">Trust Score : {{output.trust_score}} / 100</span>
                 {% elif output.trust_score >= 70 and output.trust_score < 90 %}
-                <span style="color: yellowgreen; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
+                <span class="high">Trust Score : {{output.trust_score}} / 100</span>
                 {% else %}
-                <span style="color: green; font-size: 1.25rem">Trust Score : {{output.trust_score}} / 100</span>
-                {% endif %} 
+                <span class="excellent">Trust Score : {{output.trust_score}} / 100</span>
+                {% endif %}
+            </div>
 
-            </strong>
-            
-            <br>
-            URL : {{output.url}}
-
-            {% if output.msg is defined %}
-                <br>
-              {{output.msg}}
-            {% endif %}
+            <div class="url-info">
+                <p>URL: {{output.url}}</p>
+                {% if output.msg is defined %}
+                <p>{{output.msg}}</p>
+                {% endif %}
+            </div>
 
             {% if output.response_status != False %}
-                
-                
-            <br><br>
-            
-            <form id="preview" class="preview-form" action="{{ url_for('preview')}}" method="POST" target="_blank">
-                <input type="hidden" name="url" value="{{output.url}}">
-            </form>
 
-            <button class = "preview-button" onclick="document.getElementById('preview').submit()">Preview URL within SafeSurf</button>
+            <div class="preview-buttons">
+                <form id="preview" class="preview-form" action="{{ url_for('preview')}}" method="POST" target="_blank">
+                    <input type="hidden" name="url" value="{{output.url}}">
+                    <button class="preview-button" type="submit">Preview URL within SafeSurf</button>
+                </form>
 
-            
-            
-            <form id="source-code" class="source-code-form" action="{{ url_for('view_source_code')}}" method="POST" target="_blank">
-                <input type="hidden" name="url" value="{{output.url}}">
-            </form>
+                <form id="source-code" class="source-code-form" action="{{ url_for('view_source_code')}}" method="POST" target="_blank">
+                    <input type="hidden" name="url" value="{{output.url}}">
+                    <button class="preview-button" type="submit">Show Source Code of URL</button>
+                </form>
+            </div>
 
-            <button class = "preview-button" onclick="document.getElementById('source-code').submit()">Show Source Code of URL</button>
-            
-            <br><br>(External scripts are disabled for your safety.)
+            <p class="note">(External scripts are disabled for your safety.)</p>
 
             {% else %}
 
-               <br><br>
-               Can not access this page at the moment. Page may be down or may have blocked viewing with scripts.
+            <p class="error">Can not access this page at the moment. Page may be down or may have blocked viewing with scripts.</p>
 
             {% endif %}
 
+            <div class="info-section">
+                <h3>Info for Nerds</h3>
 
+                <div class="info-grid">
+                    <div class="info-item">
+                        <p class="info-label">Global Rank</p>
+                        <p class="info-value">{{output.rank}}</p>
+                    </div>
 
+                    <div class="info-item">
+                        <p class="info-label">HTTP Status Code</p>
+                        <p class="info-value">{{output.response_status}}</p>
+                    </div>
 
-            <br><br><br>
+                    <div class="info-item">
+                        <p class="info-label">Domain Age</p>
+                        <p class="info-value">{{output.age}}</p>
+                    </div>
 
+                    <div class="info-item">
+                        <p class="info-label">Use of URL Shortener</p>
+                        <p class="info-value">{% if output.is_url_shortened == 1%} YES {% else %} NO {% endif %}</p>
+                    </div>
 
-            <strong>Info for Nerds</strong>
+                    <div class="info-item">
+                        <p class="info-label">HSTS Support</p>
+                        <p class="info-value">{% if output.hsts_support == 1%} YES {% else %} NO {% endif %}</p>
+                    </div>
 
-            <br><br>
-            <table class="table-view">
-                <thead>
-                    <tr>
-                        <th>Property</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
+                    <div class="info-item">
+                        <p class="info-label">IP instead of Domain</p>
+                        <p class="info-value">{% if output.ip_present == 1%} YES {% else %} NO {% endif %}</p>
+                    </div>
 
-                    <tr>
-                        <td>Global Rank</td>
-                        <td>{{output.rank}}</td>
-                    </tr>
+                    <div class="info-item">
+                        <p class="info-label">URL Redirects</p>
+                        <p class="info-value">{% if output.url_redirects == 0%} NO {% else %}  {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</p>
+                    </div>
 
-                    <tr>
-                        <td>HTTP Status Code</td>
-                        <td>{{output.response_status}}</td>
-                    </tr>
+                    <div class="info-item">
+                        <p class="info-label">IP of Domain</p>
+                        <p class="info-value">{{output.ip}}</p>
+                    </div>
 
-                    <tr>
-                        <td>Domain Age</td>
-                        <td>{{output.age}}</td>
-                    </tr>
+                    <div class="info-item">
+                        <p class="info-label">Too Long URL</p>
+                        <p class="info-value">{% if output.too_long_url == 1%} YES {% else %} NO {% endif %}</p>
+                    </div>
 
-                    <tr>
-                        <td>Use of URL Shortener</td>
-                        <td>{% if output.is_url_shortened == 1%} YES {% else %} NO {% endif %}</td>
-                    </tr>
-
-                    <tr>
-                        <td>HSTS Support</td>
-                        <td>{% if output.hsts_support == 1%} YES {% else %} NO {% endif %}</td>
-                    </tr>
-
-                    <tr>
-                        <td>IP instead of Domain</td>
-                        <td>{% if output.ip_present == 1%} YES {% else %} NO {% endif %}</td>
-                    </tr>
-
-                    <tr>
-                        <td>URL Redirects</td>
-                        <td>{% if output.url_redirects == 0%} NO {% else %}  {% for value in output.url_redirects %} {{ value }} &nbsp;{% endfor %} {% endif %}</td>
-                    </tr>
-
-                    <tr>
-                        <td>IP of Domain</td>
-                        <td>{{output.ip}}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Too Long URL</td>
-                        <td>{% if output.too_long_url == 1%} YES {% else %} NO {% endif %}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Too Deep URL</td>
-                        <td>{% if output.too_deep_url == 1%} YES {% else %} NO {% endif %}</td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-            <br><br>
-
-
+                    <div class="info-item">
+                        <p class="info-label">Too Deep URL</p>
+                        <p class="info-value">{% if output.too_deep_url == 1%} YES {% else %} NO {% endif %}</p>
+                    </div>
+                </div>
+            </div>
 
             {% if output.ssl != 0 %}
-            
-            <strong> SSL Certificate Details </strong>
-            <br><br>
+            <div class="ssl-section">
+                <h3>SSL Certificate Details</h3>
 
-            <table class="table-view">
-                <thead>
-                    <tr>
-                        <th>Property</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <div class="info-grid">
                     {% for key, value in output.ssl.items() %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
+                    <div class="info-item">
+                        <p class="info-label">{{ key }}</p>
+                        <p class="info-value">{{ value }}</p>
+                    </div>
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
             {% endif %}
 
+            <div class="whois-section">
+                <h3>WHOIS Data</h3>
 
-
-            <br><br>
-            <strong> WHOIS Data </strong>
-            <br><br>
-
-            <table class="table-view">
-                <thead>
-                    <tr>
-                        <th>Property</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <div class="info-grid">
                     {% for key, value in output.whois.items() %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
+                    <div class="info-item">
+                        <p class="info-label">{{ key }}</p>
+                        <p class="info-value">{{ value }}</p>
+                    </div>
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
 
-
-            
-
-
-            {% else %} URL : {{output.url}} <br> Message : {{output.msg}} <br> {% endif %}
-            <br><br>
+            {% else %}
+            <p>URL: {{output.url}}</p>
+            <p>Message: {{output.msg}}</p>
+            {% endif %}
 
         </div>
-        {% endif %} {% endblock %}
+        {% endif %}
 
+    </div>
 
+    {% endblock %}
 
 </body>
 
 </html>
-
-
-
-
