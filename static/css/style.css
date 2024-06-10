@@ -379,14 +379,26 @@ button[type="submit"]:hover {
 
 /* New CSS to make the footer always visible at the bottom */
 .app-footer {
+    background-color: #1D1D1D;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
+    margin-top: 10px;
+    z-index: 9999;
     width: 100%;
-    text-align: center;
-    padding: 1rem;
-    background-color: #1D1D1D;
-    color: #fff;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    height: 4rem;
+}
+
+.app-footer a {
+    color: #7653ff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.app-footer a:hover {
+    color: #6e49ff;
 }
