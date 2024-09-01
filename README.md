@@ -29,7 +29,7 @@ If you find this project useful or interesting, please consider starring it and 
 To run the application on your system, you can choose one of the following methods:
 
 ### A. Using Docker (Recommended)
-If you have Docker installed on your computer, you can easily run the application by executing the following commands.
+If you have Docker installed on your computer, you can easily run the application by executing the following commands. (Make sure docker engine is up and running before installation)
 
 1. Clone the repository: 
 

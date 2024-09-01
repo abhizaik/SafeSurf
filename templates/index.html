@@ -18,7 +18,7 @@
 
         <form action="/" method="post">
             <input type="text" name="url" placeholder="URL" required="required" />
-            <button type="submit" class="btn" onclick="showLoadingSpinner()">Verify URL</button>
+            <button type="submit" class="btn" onclick="showLoadingSpinner()"><b>Analyze URL</b></button>
         </form>
 
         {% if output != "NA" %}
@@ -51,12 +51,12 @@
             <div class="preview-buttons">
                 <form id="preview" class="preview-form" action="{{ url_for('preview')}}" method="POST" target="_blank">
                     <input type="hidden" name="url" value="{{output.url}}">
-                    <button class="preview-button" type="submit">Preview within SafeSurf</button>
+                    <button class="preview-button" type="submit">Website Preview</button>
                 </form>
 
                 <form id="source-code" class="source-code-form" action="{{ url_for('view_source_code')}}" method="POST" target="_blank">
                     <input type="hidden" name="url" value="{{output.url}}">
-                    <button class="preview-button" type="submit">Show Source Code</button>
+                    <button class="preview-button" type="submit">View Code</button>
                 </form>
             </div>
 
